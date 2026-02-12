@@ -49,16 +49,15 @@ git commit -m "Biblioteca SQL para Power BI"
 git push origin main
 ```
 
-### Paso 2: Activa GitHub Pages
+### Paso 2: Activa GitHub Pages con GitHub Actions
 
 1. Ve a tu repositorio en GitHub
 2. Click en **Settings** (Configuración)
 3. En el menú lateral, click en **Pages**
 4. En **Source**, selecciona:
-   - Branch: `main`
-   - Folder: `/ (root)`
-5. Click en **Save**
-6. Espera 1-2 minutos
+   - **GitHub Actions** (en lugar de "Deploy from a branch")
+5. El workflow se ejecutará automáticamente después del push
+6. Espera 1-2 minutos para que el despliegue termine
 
 ### Paso 3: Accede a tu sitio
 
