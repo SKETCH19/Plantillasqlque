@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblioteca SQL - Queries para Power BI</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>📊 Biblioteca de Queries SQL</h1>
+            <p class="subtitle">50 plantillas listas para usar en tus proyectos de Power BI</p>
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="🔍 Buscar query... (ej: JOIN, COUNT, filtrar)">
+            </div>
+        </div>
+    </header>
+
+    <nav class="nav-categories">
+        <div class="container">
+            <button class="category-btn active" data-category="all">Todos</button>
+            <button class="category-btn" data-category="basicos">Básicos</button>
+            <button class="category-btn" data-category="ordenar">Ordenar</button>
+            <button class="category-btn" data-category="agrupar">Agrupar</button>
+            <button class="category-btn" data-category="joins">JOINs</button>
+            <button class="category-btn" data-category="subqueries">Subqueries</button>
+            <button class="category-btn" data-category="bi">Cases BI</button>
+            <button class="category-btn" data-category="manipular">Manipular</button>
+            <button class="category-btn" data-category="avanzado">Avanzado</button>
+        </div>
+    </nav>
+
+    <main class="container">
+        <!-- SECCIÓN 1: SELECCIONAR Y FILTRAR -->
+        <section class="category-section" data-category="basicos">
+            <h2>🔷 Seleccionar y Filtrar (Básicos)</h2>
+            <p class="category-description">Queries fundamentales para extraer y filtrar datos. Úsalos en Power BI para crear consultas DirectQuery o importar datos filtrados.</p>
+
+            <!-- Query 1 -->
+            <div class="query-card" data-tags="select todo tabla básico">
+                <div class="query-header">
+                    <span class="query-number">Query #1</span>
+                    <h3>Seleccionar Todo de una Tabla</h3>
+                </div>
+                <div class="query-content">
+                    <div class="query-explanation">
+                        <strong>¿Para qué sirve?</strong> Obtiene todos los registros y columnas de una tabla.
+                        <br><strong>Uso en Power BI:</strong> Importar una tabla completa al modelo de datos. Evítalo en tablas grandes, mejor filtra primero.
+                    </div>
+                    <pre><code class="sql">-- Selecciona todas las columnas y filas de una tabla
+SELECT * FROM Tabla;</code></pre>
+                    <button class="copy-btn" onclick="copyCode(this)">📋 Copiar</button>
+                </div>
+            </div>
+
+            <!-- Query 2 -->
+            <div class="query-card" data-tags="select columnas específicas">
+                <div class="query-header">
+                    <span class="query-number">Query #2</span>
+                    <h3>Columnas Específicas</h3>
+                </div>
+                <div class="query-content">
+                    <div class="query-explanation">
+                        <strong>¿Para qué sirve?</strong> Selecciona solo las columnas que necesitas, ignorando el resto.
+                        <br><strong>Uso en Power BI:</strong> Reduce el tamaño del modelo importando solo columnas relevantes. Mejora rendimiento.
+                    </div>
+                    <pre><code class="sql">-- Solo trae las columnas que necesitas
+SELECT Columna1, Columna2 FROM Tabla;</code></pre>
+                    <button class="copy-btn" onclick="copyCode(this)">📋 Copiar</button>
+                </div>
+            </div>
+
+            <!-- Query 3 -->
+            <div class="query-card" data-tags="where filtrar condición">
+                <div class="query-header">
+                    <span class="query-number">Query #3</span>
+                    <h3>Filtrar por Condición</h3>
+                </div>
+                <div class="query-content">
+                    <div class="query-explanation">
+                        <strong>¿Para qué sirve?</strong> Filtra registros que cumplan una condición específica.
+                        <br><strong>Uso en Power BI:</strong> Importar solo datos del año actual, de un país específico, o registros activos.
+                    </div>
+                    <pre><code class="sql">-- Filtra solo los registros que cumplan la condición
+-- Ejemplo: WHERE Fecha >= '2025-01-01' o WHERE Pais = 'México'
+SELECT * FROM Tabla WHERE Condicion;</code></pre>
+                    <button class="copy-btn" onclick="copyCode(this)">📋 Copiar</button>
+                </div>
+            </div>
+
+            <!-- Query 4 -->
+            <div class="query-card" data-tags="and múltiples condiciones">
+                <div class="query-header">
+                    <span class="query-number">Query #4</span>
+                    <h3>Filtrar con Múltiples Condiciones (AND)</h3>
+                </div>
+                <div class="query-content">
+                    <div class="query-explanation">
+                        <strong>¿Para qué sirve?</strong> Filtra cuando TODAS las condiciones deben cumplirse simultáneamente.
+                        <br><strong>Uso en Power BI:</strong> Ventas del 2025 Y del país México Y con importe > 1000.
+                    </div>
+                    <pre><code class="sql">-- Todas las condiciones deben ser verdaderas
+-- Ejemplo: WHERE Año = 2025 AND Pais = 'México' AND Importe > 1000
+SELECT * FROM Tabla WHERE Condicion1 AND Condicion2;</code></pre>
+                    <button class="copy-btn" onclick="copyCode(this)">📋 Copiar</button>
+                </div>
+            </div>
+
+            <!-- Query 5 -->
+            <div class="query-card" data-tags="or condiciones alternativas">
+                <div class="query-header">
+                    <span class="query-number">Query #5</span>
+                    <h3>Filtrar con OR</h3>
+                </div>
+                <div class="query-content">
+                    <div class="query-explanation">
+                        <strong>¿Para qué sirve?</strong> Filtra cuando AL MENOS UNA de las condiciones se cumple.
+                        <br><strong>Uso en Power BI:</strong> Ventas de México O Estados Unidos O Canadá.
+                    </div>
+                    <pre><code class="sql">-- Al menos una condición debe ser verdadera
+-- Ejemplo: WHERE Pais = 'México' OR Pais = 'USA' OR Pais = 'Canadá'
+SELECT * FROM Tabla WHERE Condicion1 OR Condicion2;</code></pre>
+                    <button class="copy-btn" onclick="copyCode(this)">📋 Copiar</button>
+                </div>
+            </div>
+
+            <!-- Query 6 -->
+            <div class="query-card" data-tags="between rango números fechas">
+                <div class="query-header">
+                    <span class="query-number">Query #6</span>
+                    <h3>Filtrar por Rango (BETWEEN)</h3>
+                </div>
+                <div class="query-content">
+                    <div class="query-explanation">
+                        <strong>¿Para qué sirve?</strong> Filtra valores dentro de un rango (números, fechas).
+                        <br><strong>Uso en Power BI:</strong> Productos con precio entre $10 y $50, o ventas de enero a marzo.
+                    </div>
+                    <pre><code class="sql">-- Valores entre un mínimo y un máximo (inclusivo)
+-- Ejemplo: WHERE Precio BETWEEN 10 AND 50
+-- Ejemplo: WHERE Fecha BETWEEN '2025-01-01' AND '2025-03-31'
+SELECT * FROM Tabla WHERE Columna BETWEEN 10 AND 20;</code></pre>
+                    <button class="copy-btn" onclick="copyCode(this)">📋 Copiar</button>
+                </div>
+            </div>
+
+            <!-- Query 7 -->
+            <div class="query-card" data-tags="in lista valores">
+                <div class="query-header">
+                    <span class="query-number">Query #7</span>
+                    <h3>Filtrar por Lista de Valores (IN)</h3>
+                </div>
+                <div class="query-content">
+                    <div class="query-explanation">
+                        <strong>¿Para qué sirve?</strong> Filtra cuando el valor está en una lista específica.
+                        <br><strong>Uso en Power BI:</strong> Más limpio que múltiples OR. Ej: países de LATAM, categorías específicas.
+                    </div>
+                    <pre><code class="sql">-- Filtra valores que estén en la lista
+-- Ejemplo: WHERE Categoria IN ('Electrónica', 'Ropa', 'Hogar')
+-- Más limpio que: Categoria = 'A' OR Categoria = 'B' OR Categoria = 'C'
+SELECT * FROM Tabla WHERE Columna IN ('A', 'B', 'C');</code></pre>
+                    <button class="copy-btn" onclick="copyCode(this)">📋 Copiar</button>
+                </div>
+            </div>
+
+            <!-- Query 8 -->
+            <div class="query-card" data-tags="like texto contiene búsqueda">
+                <div class="query-header">
+                    <span class="query-number">Query #8</span>
+                    <h3>Buscar Texto que Contenga (LIKE)</h3>
+                </div>
+                <div class="query-content">
+                    <div class="query-explanation">
+                        <strong>¿Para qué sirve?</strong> Busca texto que contenga una palabra o patrón en cualquier posición.
+                        <br><strong>Uso en Power BI:</strong> Buscar productos que contengan "iPhone", clientes con "García" en el nombre.
+                    </div>
+                    <pre><code class="sql">-- Busca texto que contenga la palabra en cualquier parte
+-- % = cualquier cantidad de caracteres
+-- Ejemplo: WHERE Nombre LIKE '%García%' (encuentra García, José García, García López)
+SELECT * FROM Tabla WHERE Nombre LIKE '%texto%';</code></pre>
+                    <button class="copy-btn" onclick="copyCode(this)">📋 Copiar</button>
+                </div>
+            </div>
+
+            <!-- Query 9 -->
+            <div class="query-card" data-tags="like empiece con prefijo">
+                <div class="query-header">
+                    <span class="query-number">Query #9</span>
+                    <h3>Buscar Texto que Empiece Con</h3>
+                </div>
+                <div class="query-content">
+                    <div class="query-explanation">
+                        <strong>¿Para qué sirve?</strong> Busca texto que comience con un patrón específico.
+                        <br><strong>Uso en Power BI:</strong> Productos que empiecen con "iPhone", códigos que empiecen con "MX-".
+                    </div>
+                    <pre><code class="sql">-- Busca texto que empiece con el patrón
+-- Ejemplo: WHERE Codigo LIKE 'MX-%' (encuentra MX-001, MX-ABC, etc.)
+-- Ejemplo: WHERE Producto LIKE 'iPhone%' (iPhone 12, iPhone 13 Pro, etc.)
+SELECT * FROM Tabla WHERE Nombre LIKE 'Inicio%';</code></pre>
+                    <button class="copy-btn" onclick="copyCode(this)">📋 Copiar</button>
+                </div>
+            </div>
+
+            <!-- Query 10 -->
+            <div class="query-card" data-tags="null nulo vacío">
+                <div class="query-header">
+                    <span class="query-number">Query #10</span>
+                    <h3>Filtrar Valores Nulos</h3>
+                </div>
+                <div class="query-content">
+                    <div class="query-explanation">
+                        <strong>¿Para qué sirve?</strong> Encuentra registros donde una columna no tiene valor (NULL).
+                        <br><strong>Uso en Power BI:</strong> Detectar datos incompletos, clientes sin email, productos sin categoría.
+                    </div>
+                    <pre><code class="sql">-- Encuentra valores NULL (vacíos)
+-- Útil para detectar datos faltantes
+-- Ejemplo: WHERE Email IS NULL (clientes sin email registrado)
+SELECT * FROM Tabla WHERE Columna IS NULL;</code></pre>
+                    <button class="copy-btn" onclick="copyCode(this)">📋 Copiar</button>
+                </div>
+            </div>
+
+            <!-- Query 11 -->
+            <div class="query-card" data-tags="not null no nulo con valor">
+                <div class="query-header">
+                    <span class="query-number">Query #11</span>
+                    <h3>Filtrar Valores No Nulos</h3>
+                </div>
+                <div class="query-content">
+                    <div class="query-explanation">
+                        <strong>¿Para qué sirve?</strong> Encuentra registros que SÍ tienen valor (no son NULL).
+                        <br><strong>Uso en Power BI:</strong> Solo clientes con email, productos con descripción completa.
+                    </div>
+                    <pre><code class="sql">-- Excluye valores NULL, solo registros con dato
+-- Ejemplo: WHERE Email IS NOT NULL (solo clientes con email)
+-- Ejemplo: WHERE FechaEntrega IS NOT NULL (solo pedidos entregados)
+SELECT * FROM Tabla WHERE Columna IS NOT NULL;</code></pre>
+                    <button class="copy-btn" onclick="copyCode(this)">📋 Copiar</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: ORDENAR Y LIMITAR -->
+        <section class="category-section" data-category="ordenar">
+            <h2>🔷 Ordenar y Limitar</h2>
+            <p class="category-description">Controla el orden de los resultados y limita la cantidad de registros. Esencial para Top N en Power BI.</p>
+
+            <!-- Query 12 -->
+            <div class="query-card" data-tags="order by asc ascendente ordenar">
+                <div class="query-header">
+                    <span class="query-number">Query #12</span>
+                    <h3>Ordenar Ascendente (A-Z, 0-9)</h3>
+                </div>
+                <div class="query-content">
+                    <div class="query-explanation">
+                        <strong>¿Para qué sirve?</strong> Ordena de menor a mayor (A-Z, 0-9, fechas antiguas primero).
+                        <br><strong>Uso en Power BI:</strong> Productos más baratos primero, ventas más antiguas primero.
+                    </div>
+                    <pre><code class="sql">-- Ordena de menor a mayor: A-Z, 0-9, fechas antiguas primero
+-- Ejemplo: ORDER BY Precio ASC (más barato primero)
+-- Ejemplo: ORDER BY Fecha ASC (más antiguo primero)
+SELECT * FROM Tabla ORDER BY Columna ASC;</code></pre>
+                    <button class="copy-btn" onclick="copyCode(this)">📋 Copiar</button>
+                </div>
+            </div>
+
+            <!-- Query 13 -->
+            <div class="query-card" data-tags="order by desc descendente ordenar">
+                <div class="query-header">
+                    <span class="query-number">Query #13</span>
+                    <h3>Ordenar Descendente (Z-A, 9-0)</h3>
+                </div>
+                <div class="query-content">
+                    <div class="query-explanation">
+                        <strong>¿Para qué sirve?</strong> Ordena de mayor a menor (Z-A, 9-0, fechas recientes primero).
+                        <br><strong>Uso en Power BI:</strong> Productos más caros, ventas más recientes, mejores clientes.
+                    </div>
+                    <pre><code class="sql">-- Ordena de mayor a menor: Z-A, 9-0, fechas recientes primero
+-- Ejemplo: ORDER BY Ventas DESC (mayor ventas primero)
+-- Ejemplo: ORDER BY Fecha DESC (más reciente primero)
+SELECT * FROM Tabla ORDER BY Columna DESC;</code></pre>
+                    <button class="copy-btn" onclick="copyCode(this)">📋 Copiar</button>
+                </div>
+            </div>
+
+            <!-- Query 14 -->
+            <div class="query-card" data-tags="top limit top n mejores">
+                <div class="query-header">
+                    <span class="query-number">Query #14</span>
+                    <h3>Top N Registros (SQL Server)</h3>
+                </div>
+                <div class="query-content">
+                    <div class="query-explanation">
+                        <strong>¿Para qué sirve?</strong> Obtiene los primeros N registros (SQL Server / T-SQL).
+                        <br><strong>Uso en Power BI:</strong> Top 10 productos más vendidos, Top 5 clientes por ingresos.
+                    </div>
+                    <pre><code class="sql">-- Trae solo los primeros N registros (SQL Server)
+-- Ejemplo: SELECT TOP 10 * ... ORDER BY Ventas DESC (top 10 con más ventas)
+-- Ejemplo: SELECT TOP 5 * ... ORDER BY Precio DESC (5 más caros)
+SELECT TOP 10 * FROM Tabla ORDER BY Columna DESC;</code></pre>
+                    <button class="copy-btn" onclick="copyCode(this)">📋 Copiar</button>
+                </div>
+            </div>
+
+            <!-- Query 15 -->
+            <div class="query-card" data-tags="limit top n mysql postgresql">
+                <div class="query-header">
+                    <span class="query-number">Query #15</span>
+                    <h3>Top N Registros (MySQL/PostgreSQL)</h3>
+                </div>
+                <div class="query-content">
+                    <div class="query-explanation">
+                        <strong>¿Para qué sirve?</strong> Obtiene los primeros N registros (MySQL, PostgreSQL).
+                        <br><strong>Uso en Power BI:</strong> Mismo uso que TOP pero para bases MySQL o PostgreSQL.
+                    </div>
+                    <pre><code class="sql">-- Trae solo los primeros N registros (MySQL/PostgreSQL)
+-- Va al FINAL de la consulta
+-- Ejemplo: ... ORDER BY Ventas DESC LIMIT 10
+SELECT * FROM Tabla ORDER BY Columna DESC LIMIT 10;</code></pre>
+                    <button class="copy-btn" onclick="copyCode(this)">📋 Copiar</button>
+                </div>
+            </div>
+
+            <!-- Query 16 -->
+            <div class="query-card" data-tags="top with ties empates">
+                <div class="query-header">
+                    <span class="query-number">Query #16</span>
+                    <h3>Top N con Empates</h3>
+                </div>
+                <div class="query-content">
+                    <div class="query-explanation">
+                        <strong>¿Para qué sirve?</strong> Incluye registros adicionales si empatan con el último del Top N.
+                        <br><strong>Uso en Power BI:</strong> Top 10 pero si hay empate en el puesto 10, incluir todos los empatados.
+                    </div>
+                    <pre><code class="sql">-- Si hay empate en la posición N, incluye todos los empatados
+-- Ejemplo: Top 10 productos, pero si 3 productos empatan en precio #10, trae los 12
+SELECT TOP 10 WITH TIES * FROM Tabla ORDER BY Columna DESC;</code></pre>
+                    <button class="copy-btn" onclick="copyCode(this)">📋 Copiar</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 3: AGRUPAR Y RESUMIR -->
+        <section class="category-section" data-category="agrupar">
+            <h2>🔷 Agrupar y Resumir (Agregaciones)</h2>
+            <p class="category-description">Funciones de agregación para análisis. La base de cualquier reporte BI: totales, promedios, conteos.</p>
+
+            <!-- Query 17 -->
+            <div class="query-card" data-tags="count contar total filas">
+                <div class="query-header">
+                    <span class="query-number">Query #17</span>
+                    <h3>Contar Total de Filas</h3>
+                </div>
+                <div class="query-content">
+                    <div class="query-explanation">
+                        <strong>¿Para qué sirve?</strong> Cuenta el número total de registros en una tabla.
+                        <br><strong>Uso en Power BI:</strong> Cuántos clientes tengo, cuántas ventas se hicieron, total de productos.
+                    </div>
+                    <pre><code class="sql">-- Cuenta cuántas filas tiene la tabla
+-- Ejemplo: SELECT COUNT(*) AS TotalClientes FROM Clientes;
+-- Ejemplo: SELECT COUNT(*) AS TotalVentas FROM Ventas WHERE Año = 2025;
+SELECT COUNT(*) AS Total FROM Tabla;</code></pre>
+                    <button class="copy-btn" onclick="copyCode(this)">📋 Copiar</button>
+                </div>
+            </div>
+
+            <!-- Query 18 -->
+            <div class="query-card" data-tags="count columna no nulos">
+                <div class="query-header">
+                    <span class="query-number">Query #18</span>
+                    <h3>Contar No Nulos en Columna</h3>
+                </div>
+                <div class="query-content">
+                    <div class="query-explanation">
+                        <strong>¿Para qué sirve?</strong> Cuenta solo registros que tienen valor (no NULL) en esa columna.
+                        <br><strong>Uso en Power BI:</strong> Cuántos clientes tienen email, cuántos productos tienen descripción.
+                    </div>
+                    <pre><code class="sql">-- Cuenta solo valores NO NULL en esa columna
+-- Ejemplo: COUNT(Email) - solo cuenta clientes con email registrado
+-- Diferente de COUNT(*) que cuenta todas las filas
+SELECT COUNT(Columna) FROM Tabla;</code></pre>
+                    <button class="copy-btn" onclick="copyCode(this)">📋 Copiar</button>
+                </div>
+            </div>
+
+            <!-- Query 19 -->
+            <div class="query-card" data-tags="count distinct únicos diferentes">
+                <div class="query-header">
+                    <span class="query-number">Query #19</span>
+                    <h3>Contar Valores Únicos</h3>
+                </div>
+                <div class="query-content">
+                    <div class="query-explanation">
+                        <strong>¿Para qué sirve?</strong> Cuenta valores únicos/diferentes, sin repetir.
+                        <br><strong>Uso en Power BI:</strong> Cuántos países distintos compraron, cuántos productos únicos se vendieron.
+                    </div>
+                    <pre><code class="sql">-- Cuenta valores ÚNICOS (sin repetir)
+-- Ejemplo: COUNT(DISTINCT Pais) - cuántos países diferentes
+-- Ejemplo: COUNT(DISTINCT ProductoID) - cuántos productos distintos vendidos
+SELECT COUNT(DISTINCT Columna) FROM Tabla;</code></pre>
+                    <button class="copy-btn" onclick="copyCode(this)">📋 Copiar</button>
+                </div>
+            </div>
+
+            <!-- Query 20 -->
+            <div class="query-card" data-tags="sum suma total">
+                <div class="query-header">
+                    <span class="query-number">Query #20</span>
+                    <h3>Suma de Columna</h3>
+                </div>
+                <div class="query-content">
+                    <div class="query-explanation">
+                        <strong>¿Para qué sirve?</strong> Suma todos los valores numéricos de una columna.
+                        <br><strong>Uso en Power BI:</strong> Total de ventas, suma de cantidades, ingresos totales.
+                    </div>
+                    <pre><code class="sql">-- Suma todos los valores de la columna
+-- Ejemplo: SUM(Importe) - total de ingresos
+-- Ejemplo: SUM(Cantidad) - total de unidades vendidas
+SELECT SUM(Columna) FROM Tabla;</code></pre>
+                    <button class="copy-btn" onclick="copyCode(this)">📋 Copiar</button>
+                </div>
+            </div>
+
+            <!-- Query 21 -->
+            <div class="query-card" data-tags="avg promedio media">
+                <div class="query-header">
+                    <span class="query-number">Query #21</span>
+                    <h3>Promedio</h3>
+                </div>
+                <div class="query-content">
+                    <div class="query-explanation">
+                        <strong>¿Para qué sirve?</strong> Calcula el promedio (media aritmética) de valores numéricos.
+                        <br><strong>Uso en Power BI:</strong> Ticket promedio de venta, precio promedio de productos, rating promedio.
+                    </div>
+                    <pre><code class="sql">-- Calcula el promedio (media)
+-- Ejemplo: AVG(Precio) - precio promedio de productos
+-- Ejemplo: AVG(Importe) - ticket promedio de compra
+SELECT AVG(Columna) FROM Tabla;</code></pre>
+                    <button class="copy-btn" onclick="copyCode(this)">📋 Copiar</button>
+                </div>
+            </div>
+
+            <!-- Query 22 -->
+            <div class="query-card" data-tags="max máximo mayor">
+                <div class="query-header">
+                    <span class="query-number">Query #22</span>
+                    <h3>Valor Máximo</h3>
+                </div>
+                <div class="query-content">
+                    <div class="query-explanation">
+                        <strong>¿Para qué sirve?</strong> Encuentra el valor más alto de una columna.
+                        <br><strong>Uso en Power BI:</strong> Venta más alta, producto más caro, fecha más reciente.
+                    </div>
+                    <pre><code class="sql">-- Encuentra el valor máximo
+-- Ejemplo: MAX(Precio) - producto más caro
+-- Ejemplo: MAX(Fecha) - fecha más reciente
+SELECT MAX(Columna) FROM Tabla;</code></pre>
+                    <button class="copy-btn" onclick="copyCode(this)">📋 Copiar</button>
+                </div>
+            </div>
+
+            <!-- Query 23 -->
+            <div class="query-card" data-tags="min mínimo menor">
+                <div class="query-header">
+                    <span class="query-number">Query #23</span>
+                    <h3>Valor Mínimo</h3>
+                </div>
+                <div class="query-content">
+                    <div class="query-explanation">
+                        <strong>¿Para qué sirve?</strong> Encuentra el valor más bajo de una columna.
+                        <br><strong>Uso en Power BI:</strong> Venta más baja, producto más barato, fecha más antigua.
+                    </div>
+                    <pre><code class="sql">-- Encuentra el valor mínimo
+-- Ejemplo: MIN(Precio) - producto más barato
+-- Ejemplo: MIN(Fecha) - fecha más antigua
+SELECT MIN(Columna) FROM Tabla;</code></pre>
+                    <button class="copy-btn" onclick="copyCode(this)">📋 Copiar</button>
+                </div>
+            </div>
+
+            <!-- Query 24 -->
+            <div class="query-card" data-tags="group by agrupar categoría">
+                <div class="query-header">
+                    <span class="query-number">Query #24</span>
+                    <h3>Agrupar por Categoría</h3>
+                </div>
+                <div class="query-content">
+                    <div class="query-explanation">
+                        <strong>¿Para qué sirve?</strong> Agrupa registros por categoría y calcula totales/conteos por grupo.
+                        <br><strong>Uso en Power BI:</strong> Ventas por categoría, clientes por país, productos por marca.
+                    </div>
+                    <pre><code class="sql">-- Agrupa por categoría y cuenta/suma cada grupo
+-- Ejemplo: Ventas por país, productos por categoría
+-- Ejemplo: SELECT Pais, COUNT(*) AS Clientes FROM Clientes GROUP BY Pais;
+SELECT Categoria, COUNT(*) AS Total
+FROM Tabla
+GROUP BY Categoria;</code></pre>
+                    <button class="copy-btn" onclick="copyCode(this)">📋 Copiar</button>
+                </div>
+            </div>
+
+            <!-- Query 25 -->
+            <div class="query-card" data-tags="group by múltiples columnas">
+                <div class="query-header">
+                    <span class="query-number">Query #25</span>
+                    <h3>Agrupar con Múltiples Columnas</h3>
+                </div>
+                <div class="query-content">
+                    <div class="query-explanation">
+                        <strong>¿Para qué sirve?</strong> Agrupa por varias columnas para análisis más detallado.
+                        <br><strong>Uso en Power BI:</strong> Ventas por país y ciudad, ventas por año y mes, por categoría y subcategoría.
+                    </div>
+                    <pre><code class="sql">-- Agrupa por varias dimensiones
+-- Ejemplo: Ventas por Año y Mes
+-- Ejemplo: Ventas por Pais y Ciudad
+SELECT Columna1, Columna2, SUM(Importe) AS Total
+FROM Tabla
+GROUP BY Columna1, Columna2;</code></pre>
+                    <button class="copy-btn" onclick="copyCode(this)">📋 Copiar</button>
+                </div>
+            </div>
+
+            <!-- Query 26 -->
+            <div class="query-card" data-tags="having filtrar grupos agregación">
+                <div class="query-header">
+                    <span class="query-number">Query #26</span>
+                    <h3>Filtrar Grupos (HAVING)</h3>
+                </div>
+                <div class="query-content">
+                    <div class="query-explanation">
+                        <strong>¿Para qué sirve?</strong> Filtra grupos DESPUÉS de agrupar (WHERE filtra ANTES de agrupar).
+                        <br><strong>Uso en Power BI:</strong> Solo categorías con más de 100 ventas, países con más de 50 clientes.
+                    </div>
+                    <pre><code class="sql">-- Filtra DESPUÉS de agrupar (WHERE filtra ANTES)
+-- Ejemplo: Solo categorías con más de 100 productos
+-- Ejemplo: Solo países con más de 1000 ventas
+SELECT Categoria, COUNT(*) AS Total
+FROM Tabla
+GROUP BY Categoria
+HAVING COUNT(*) > 10;</code></pre>
+                    <button class="copy-btn" onclick="copyCode(this)">📋 Copiar</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 4: JOINS -->
+        <section class="category-section" data-category="joins">
+            <h2>🔷 JOINs - Combinar Tablas</h2>
+            <p class="category-description">Relaciona tablas entre sí. Fundamental para crear modelos de datos relacionales en Power BI.</p>
+
+            <!-- Query 27 -->
+            <div class="query-card" data-tags="inner join combinar tablas">
+                <div class="query-header">
+                    <span class="query-number">Query #27</span>
+                    <h3>INNER JOIN - Solo Coincidencias</h3>
+                </div>
+                <div class="query-content">
+                    <div class="query-explanation">
+                        <strong>¿Para qué sirve?</strong> Combina tablas trayendo SOLO registros que coinciden en AMBAS tablas.
+                        <br><strong>Uso en Power BI:</strong> Ventas con detalle de cliente (solo ventas que tienen cliente asignado).
+                    </div>
+                    <pre><code class="sql">-- Solo registros que existen en AMBAS tablas
+-- Si una venta no tiene cliente, NO aparece
+-- Ejemplo: Ventas INNER JOIN Clientes (solo ventas con cliente conocido)
+SELECT *
+FROM TablaA A
+INNER JOIN TablaB B ON A.ID = B.ID;</code></pre>
+                    <button class="copy-btn" onclick="copyCode(this)">📋 Copiar</button>
+                </div>
+            </div>
+
+            <!-- Query 28 -->
+            <div class="query-card" data-tags="left join tabla izquierda">
+                <div class="query-header">
+                    <span class="query-number">Query #28</span>
+                    <h3>LEFT JOIN - Todo de la Izquierda</h3>
+                </div>
+                <div class="query-content">
+                    <div class="query-explanation">
+                        <strong>¿Para qué sirve?</strong> Trae TODOS los registros de la tabla izquierda, con o sin coincidencia en la derecha.
+                        <br><strong>Uso en Power BI:</strong> Todos los clientes, hayan comprado o no. Todos los productos, vendidos o no.
+                    </div>
+                    <pre><code class="sql">-- TODOS los registros de la tabla A (izquierda)
+-- Si no hay match en B, campos de B son NULL
+-- Ejemplo: Clientes LEFT JOIN Ventas (todos los clientes, compraron o no)
+SELECT *
+FROM TablaA A
+LEFT JOIN TablaB B ON A.ID = B.ID;</code></pre>
+                    <button class="copy-btn" onclick="copyCode(this)">📋 Copiar</button>
+                </div>
+            </div>
+
+            <!-- Query 29 -->
+            <div class="query-card" data-tags="right join tabla derecha">
+                <div class="query-header">
+                    <span class="query-number">Query #29</span>
+                    <h3>RIGHT JOIN - Todo de la Derecha</h3>
+                </div>
+                <div class="query-content">
+                    <div class="query-explanation">
+                        <strong>¿Para qué sirve?</strong> Trae TODOS los registros de la tabla derecha, con o sin coincidencia en la izquierda.
+                        <br><strong>Uso en Power BI:</strong> Menos común que LEFT, pero útil dependiendo del orden de las tablas.
+                    </div>
+                    <pre><code class="sql">-- TODOS los registros de la tabla B (derecha)
+-- Si no hay match en A, campos de A son NULL
+-- Menos usado que LEFT JOIN (puedes invertir las tablas y usar LEFT)
+SELECT *
+FROM TablaA A
+RIGHT JOIN TablaB B ON A.ID = B.ID;</code></pre>
+                    <button class="copy-btn" onclick="copyCode(this)">📋 Copiar</button>
+                </div>
+            </div>
+
+            <!-- Query 30 -->
+            <div class="query-card" data-tags="full join todas las tablas">
+                <div class="query-header">
+                    <span class="query-number">Query #30</span>
+                    <h3>FULL JOIN - Todo de Ambas</h3>
+                </div>
+                <div class="query-content">
+                    <div class="query-explanation">
+                        <strong>¿Para qué sirve?</strong> Trae TODOS los registros de ambas tablas, coincidan o no.
+                        <br><strong>Uso en Power BI:</strong> Ver todos los clientes Y todas las ventas, para detectar huérfanos.
+                    </div>
+                    <pre><code class="sql">-- TODOS los registros de AMBAS tablas
+-- Si no hay match, los campos de la otra tabla son NULL
+-- Útil para encontrar registros huérfanos
+SELECT *
+FROM TablaA A
+FULL JOIN TablaB B ON A.ID = B.ID;</code></pre>
+                    <button class="copy-btn" onclick="copyCode(this)">📋 Copiar</button>
+                </div>
+            </div>
+
+            <!-- Query 31 -->
+            <div class="query-card" data-tags="join múltiples tablas tres">
+                <div class="query-header">
+                    <span class="query-number">Query #31</span>
+                    <h3>Unir Tres o Más Tablas</h3>
+                </div>
+                <div class="query-content">
+                    <div class="query-explanation">
+                        <strong>¿Para qué sirve?</strong> Combina múltiples tablas en una sola consulta.
+                        <br><strong>Uso en Power BI:</strong> Ventas con info de Cliente Y Producto, Pedidos con Cliente, Producto y Envío.
+                    </div>
+                    <pre><code class="sql">-- Combina tres o más tablas
+-- Ejemplo: Ventas con detalles de Cliente Y Producto
+-- Se pueden encadenar más JOINs según necesites
+SELECT *
+FROM Ventas V
+JOIN Clientes C ON V.ClienteID = C.ID
+JOIN Productos P ON V.ProductoID = P.ID;</code></pre>
+                    <button class="copy-btn" onclick="copyCode(this)">📋 Copiar</button>
+                </div>
+            </div>
+
+            <!-- Query 32 -->
+            <div class="query-card" data-tags="self join misma tabla jerárquica">
+                <div class="query-header">
+                    <span class="query-number">Query #32</span>
+                    <h3>Self JOIN - Misma Tabla Dos Veces</h3>
+                </div>
+                <div class="query-content">
+                    <div class="query-explanation">
+                        <strong>¿Para qué sirve?</strong> Une una tabla consigo misma para relaciones jerárquicas.
+                        <br><strong>Uso en Power BI:</strong> Empleados con su jefe, productos con producto relacionado, categorías con subcategorías.
+                    </div>
+                    <pre><code class="sql">-- Une una tabla consigo misma (relaciones jerárquicas)
+-- Ejemplo: Empleados con su Jefe (ambos están en tabla Empleados)
+-- Ejemplo: Productos relacionados
+SELECT A.Nombre, B.Nombre AS Jefe
+FROM Empleados A
+LEFT JOIN Empleados B ON A.JefeID = B.ID;</code></pre>
+                    <button class="copy-btn" onclick="copyCode(this)">📋 Copiar</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 5: SUBQUERIES Y CTEs -->
+        <section class="category-section" data-category="subqueries">
+            <h2>🔷 Subqueries y CTEs</h2>
+            <p class="category-description">Consultas dentro de consultas. Útil para cálculos complejos y queries más legibles en Power BI.</p>
+
+            <!-- Query 33 -->
+            <div class="query-card" data-tags="subquery where subconsulta">
+                <div class="query-header">
+                    <span class="query-number">Query #33</span>
+                    <h3>Subconsulta en WHERE</h3>
+                </div>
+                <div class="query-content">
+                    <div class="query-explanation">
+                        <strong>¿Para qué sirve?</strong> Usa el resultado de una consulta como filtro en otra.
+                        <br><strong>Uso en Power BI:</strong> Productos con precio mayor al promedio, ventas sobre la mediana.
+                    </div>
+                    <pre><code class="sql">-- Usa el resultado de una query como condición de filtro
+-- Ejemplo: Productos más caros que el promedio
+-- Primero calcula AVG(Precio), luego filtra los > a ese promedio
+SELECT * FROM Productos
+WHERE Precio > (SELECT AVG(Precio) FROM Productos);</code></pre>
+                    <button class="copy-btn" onclick="copyCode(this)">📋 Copiar</button>
+                </div>
+            </div>
+
+            <!-- Query 34 -->
+            <div class="query-card" data-tags="subquery select columna calculada">
+                <div class="query-header">
+                    <span class="query-number">Query #34</span>
+                    <h3>Subconsulta en SELECT (Columna Calculada)</h3>
+                </div>
+                <div class="query-content">
+                    <div class="query-explanation">
+                        <strong>¿Para qué sirve?</strong> Crea una columna calculada usando datos de otra tabla.
+                        <br><strong>Uso en Power BI:</strong> Cada producto con su cantidad total vendida, cada cliente con su total de compras.
+                    </div>
+                    <pre><code class="sql">-- Crea una columna con el resultado de otra query
+-- Ejemplo: Cada producto con cuántas veces se ha vendido
+-- Útil cuando no quieres hacer JOIN
+SELECT Nombre,
+       (SELECT COUNT(*) FROM Ventas WHERE ProductoID = P.ID) AS VecesVendido
+FROM Productos P;</code></pre>
+                    <button class="copy-btn" onclick="copyCode(this)">📋 Copiar</button>
+                </div>
+            </div>
+
+            <!-- Query 35 -->
+            <div class="query-card" data-tags="cte with common table expression">
+                <div class="query-header">
+                    <span class="query-number">Query #35</span>
+                    <h3>CTE Básica (WITH)</h3>
+                </div>
+                <div class="query-content">
+                    <div class="query-explanation">
+                        <strong>¿Para qué sirve?</strong> Crea una "tabla temporal" con nombre para usar en la query principal. Más legible.
+                        <br><strong>Uso en Power BI:</strong> Simplifica queries complejas, mejora legibilidad del código SQL.
+                    </div>
+                    <pre><code class="sql">-- Define una "tabla temporal" para usar después
+-- Hace el código más legible y organizado
+-- Ejemplo: Primero resume ventas por producto, luego filtra
+WITH VentasPorProducto AS (
+    SELECT ProductoID, SUM(Cantidad) AS Total
+    FROM Ventas
+    GROUP BY ProductoID
+)
+SELECT * FROM VentasPorProducto
+WHERE Total > 100;</code></pre>
+                    <button class="copy-btn" onclick="copyCode(this)">📋 Copiar</button>
+                </div>
+            </div>
+
+            <!-- Query 36 -->
+            <div class="query-card" data-tags="cte múltiples varios with">
+                <div class="query-header">
+                    <span class="query-number">Query #36</span>
+                    <h3>Múltiples CTEs</h3>
+                </div>
+                <div class="query-content">
+                    <div class="query-explanation">
+                        <strong>¿Para qué sirve?</strong> Define varias "tablas temporales" para queries muy complejas.
+                        <br><strong>Uso en Power BI:</strong> Descomponer análisis complejos en pasos simples y entendibles.
+                    </div>
+                    <pre><code class="sql">-- Define varias CTEs para queries complejas
+-- Mejora muchísimo la legibilidad
+-- Ejemplo: Filtra clientes activos Y ventas recientes, luego combina
+WITH ClientesActivos AS (
+    SELECT * FROM Clientes WHERE Activo = 1
+),
+VentasRecientes AS (
+    SELECT * FROM Ventas WHERE Fecha > '2025-01-01'
+)
+SELECT * FROM ClientesActivos C
+JOIN VentasRecientes V ON C.ID = V.ClienteID;</code></pre>
+                    <button class="copy-btn" onclick="copyCode(this)">📋 Copiar</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 6: CASOS DE NEGOCIO COMUNES (BI) -->
+        <section class="category-section" data-category="bi">
+            <h2>🔷 Casos de Negocio Comunes - Power BI</h2>
+            <p class="category-description">Queries típicos de análisis de negocio. Listo para reciclar en tus dashboards.</p>
+
+            <!-- Query 37 -->
+            <div class="query-card" data-tags="producto más vendido top ventas">
+                <div class="query-header">
+                    <span class="query-number">Query #37</span>
+                    <h3>Producto Más Vendido</h3>
+                </div>
+                <div class="query-content">
+                    <div class="query-explanation">
+                        <strong>¿Para qué sirve?</strong> Identifica el producto con mayor cantidad vendida.
+                        <br><strong>Uso en Power BI:</strong> KPI de producto estrella, análisis de inventario, estrategia de marketing.
+                    </div>
+                    <pre><code class="sql">-- Encuentra el producto con más unidades vendidas
+-- Cambia Cantidad por Importe si quieres por ingresos en vez de unidades
+SELECT TOP 1 p.Nombre, SUM(v.Cantidad) AS Total
+FROM Ventas v
+JOIN Productos p ON v.ProductoID = p.ID
+GROUP BY p.ID, p.Nombre
+ORDER BY Total DESC;</code></pre>
+                    <button class="copy-btn" onclick="copyCode(this)">📋 Copiar</button>
+                </div>
+            </div>
+
+            <!-- Query 38 -->
+            <div class="query-card" data-tags="producto más caro precio máximo">
+                <div class="query-header">
+                    <span class="query-number">Query #38</span>
+                    <h3>Producto Más Caro</h3>
+                </div>
+                <div class="query-content">
+                    <div class="query-explanation">
+                        <strong>¿Para qué sirve?</strong> Encuentra el producto con el precio más alto.
+                        <br><strong>Uso en Power BI:</strong> Análisis de pricing, segmentación de productos premium.
+                    </div>
+                    <pre><code class="sql">-- Producto con el precio unitario más alto
+-- Útil para análisis de rango de precios
+SELECT TOP 1 * FROM Productos ORDER BY Precio DESC;</code></pre>
+                    <button class="copy-btn" onclick="copyCode(this)">📋 Copiar</button>
+                </div>
+            </div>
+
+            <!-- Query 39 -->
+            <div class="query-card" data-tags="mejor cliente top cliente vip">
+                <div class="query-header">
+                    <span class="query-number">Query #39</span>
+                    <h3>Cliente que Más ha Gastado</h3>
+                </div>
+                <div class="query-content">
+                    <div class="query-explanation">
+                        <strong>¿Para qué sirve?</strong> Identifica al cliente con mayor gasto total (lifetime value).
+                        <br><strong>Uso en Power BI:</strong> Programa VIP, análisis de retención, segmentación de clientes.
+                    </div>
+                    <pre><code class="sql">-- Cliente con mayor gasto total (lifetime value)
+-- Útil para programas de lealtad y VIP
+SELECT TOP 1 c.Nombre, SUM(v.Total) AS Gasto
+FROM Ventas v
+JOIN Clientes c ON v.ClienteID = c.ID
+GROUP BY c.ID, c.Nombre
+ORDER BY Gasto DESC;</code></pre>
+                    <button class="copy-btn" onclick="copyCode(this)">📋 Copiar</button>
+                </div>
+            </div>
+
+            <!-- Query 40 -->
+            <div class="query-card" data-tags="ventas por mes mensual tendencia">
+                <div class="query-header">
+                    <span class="query-number">Query #40</span>
+                    <h3>Ventas por Mes</h3>
+                </div>
+                <div class="query-content">
+                    <div class="query-explanation">
+                        <strong>¿Para qué sirve?</strong> Agrupa ventas por año y mes para ver tendencias.
+                        <br><strong>Uso en Power BI:</strong> Gráfica de tendencia mensual, análisis de estacionalidad, forecast.
+                    </div>
+                    <pre><code class="sql">-- Ventas agrupadas por año y mes
+-- Usa YEAR() y MONTH() para extraer de columna fecha
+-- Ideal para gráficas de tendencia en Power BI
+SELECT 
+    YEAR(Fecha) AS Año,
+    MONTH(Fecha) AS Mes,
+    SUM(Total) AS Ventas
+FROM Ventas
+GROUP BY YEAR(Fecha), MONTH(Fecha)
+ORDER BY Año DESC, Mes DESC;</code></pre>
+                    <button class="copy-btn" onclick="copyCode(this)">📋 Copiar</button>
+                </div>
+            </div>
+
+            <!-- Query 41 -->
+            <div class="query-card" data-tags="mejor día ventas pico">
+                <div class="query-header">
+                    <span class="query-number">Query #41</span>
+                    <h3>Día con Más Ventas</h3>
+                </div>
+                <div class="query-content">
+                    <div class="query-explanation">
+                        <strong>¿Para qué sirve?</strong> Identifica la fecha con mayores ingresos.
+                        <br><strong>Uso en Power BI:</strong> Detectar picos de venta (Black Friday, etc.), análisis de campañas.
+                    </div>
+                    <pre><code class="sql">-- Encuentra la fecha con mayor total de ventas
+-- Útil para detectar días pico (promociones, eventos)
+SELECT TOP 1 Fecha, SUM(Total) AS TotalDia
+FROM Ventas
+GROUP BY Fecha
+ORDER BY TotalDia DESC;</code></pre>
+                    <button class="copy-btn" onclick="copyCode(this)">📋 Copiar</button>
+                </div>
+            </div>
+
+            <!-- Query 42 -->
+            <div class="query-card" data-tags="productos no vendidos sin ventas inventario">
+                <div class="query-header">
+                    <span class="query-number">Query #42</span>
+                    <h3>Productos Nunca Vendidos</h3>
+                </div>
+                <div class="query-content">
+                    <div class="query-explanation">
+                        <strong>¿Para qué sirve?</strong> Encuentra productos que existen en catálogo pero nunca se han vendido.
+                        <br><strong>Uso en Power BI:</strong> Análisis de inventario muerto, productos a descontinuar, promociones.
+                    </div>
+                    <pre><code class="sql">-- Productos que NO aparecen en tabla Ventas
+-- Útil para detectar inventario muerto
+-- NOT IN busca productos cuyo ID no está en ventas
+SELECT * FROM Productos
+WHERE ID NOT IN (SELECT DISTINCT ProductoID FROM Ventas);</code></pre>
+                    <button class="copy-btn" onclick="copyCode(this)">📋 Copiar</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 7: MANIPULACIÓN DE DATOS -->
+        <section class="category-section" data-category="manipular">
+            <h2>🔷 Manipulación de Datos</h2>
+            <p class="category-description">Insertar, actualizar y eliminar datos. Cuidado: estos cambian la base de datos permanentemente.</p>
+
+            <!-- Query 43 -->
+            <div class="query-card" data-tags="insert insertar agregar registro">
+                <div class="query-header">
+                    <span class="query-number">Query #43</span>
+                    <h3>Insertar Registro</h3>
+                </div>
+                <div class="query-content">
+                    <div class="query-explanation">
+                        <strong>¿Para qué sirve?</strong> Agrega un nuevo registro a una tabla.
+                        <br><strong>Uso en Power BI:</strong> Raramente en BI, más común en apps. En BI es solo lectura.
+                    </div>
+                    <pre><code class="sql">-- Inserta un nuevo registro en la tabla
+-- Especifica columnas y valores en el mismo orden
+-- ⚠️ MODIFICA LA BASE DE DATOS
+INSERT INTO Tabla (Columna1, Columna2) VALUES ('Valor1', 123);</code></pre>
+                    <button class="copy-btn" onclick="copyCode(this)">📋 Copiar</button>
+                </div>
+            </div>
+
+            <!-- Query 44 -->
+            <div class="query-card" data-tags="insert select copiar backup">
+                <div class="query-header">
+                    <span class="query-number">Query #44</span>
+                    <h3>Insertar desde Otra Tabla</h3>
+                </div>
+                <div class="query-content">
+                    <div class="query-explanation">
+                        <strong>¿Para qué sirve?</strong> Copia registros de una tabla a otra basado en condiciones.
+                        <br><strong>Uso en Power BI:</strong> Crear tablas de respaldo, archivar datos antiguos, staging tables.
+                    </div>
+                    <pre><code class="sql">-- Copia registros de una tabla a otra
+-- Útil para backups o tablas de archivo
+-- ⚠️ MODIFICA LA BASE DE DATOS
+INSERT INTO TablaBackup
+SELECT * FROM TablaOriginal WHERE Fecha < '2024-01-01';</code></pre>
+                    <button class="copy-btn" onclick="copyCode(this)">📋 Copiar</button>
+                </div>
+            </div>
+
+            <!-- Query 45 -->
+            <div class="query-card" data-tags="update actualizar modificar">
+                <div class="query-header">
+                    <span class="query-number">Query #45</span>
+                    <h3>Actualizar Registros</h3>
+                </div>
+                <div class="query-content">
+                    <div class="query-explanation">
+                        <strong>¿Para qué sirve?</strong> Modifica valores existentes en registros que cumplan condición.
+                        <br><strong>Uso en Power BI:</strong> Raramente. Usado en procesos ETL antes de cargar a Power BI.
+                    </div>
+                    <pre><code class="sql">-- Actualiza registros que cumplan la condición
+-- ⚠️ SIEMPRE usa WHERE o actualizarás TODA la tabla
+-- ⚠️ MODIFICA LA BASE DE DATOS PERMANENTEMENTE
+UPDATE Tabla SET Columna = 'NuevoValor' WHERE Condicion;</code></pre>
+                    <button class="copy-btn" onclick="copyCode(this)">📋 Copiar</button>
+                </div>
+            </div>
+
+            <!-- Query 46 -->
+            <div class="query-card" data-tags="delete eliminar borrar">
+                <div class="query-header">
+                    <span class="query-number">Query #46</span>
+                    <h3>Eliminar Registros</h3>
+                </div>
+                <div class="query-content">
+                    <div class="query-explanation">
+                        <strong>¿Para qué sirve?</strong> Borra registros permanentemente de una tabla.
+                        <br><strong>Uso en Power BI:</strong> Raramente. Limpieza de datos antigua, procesos ETL.
+                    </div>
+                    <pre><code class="sql">-- Elimina registros permanentemente
+-- ⚠️ SIEMPRE usa WHERE o borrarás TODA la tabla
+-- ⚠️ NO SE PUEDE DESHACER - Haz backup primero
+DELETE FROM Tabla WHERE Condicion;</code></pre>
+                    <button class="copy-btn" onclick="copyCode(this)">📋 Copiar</button>
+                </div>
+            </div>
+
+            <!-- Query 47 -->
+            <div class="query-card" data-tags="create view vista guardar">
+                <div class="query-header">
+                    <span class="query-number">Query #47</span>
+                    <h3>Crear Vista (Guardar Query)</h3>
+                </div>
+                <div class="query-content">
+                    <div class="query-explanation">
+                        <strong>¿Para qué sirve?</strong> Guarda una consulta con nombre para reutilizarla como si fuera una tabla.
+                        <br><strong>Uso en Power BI:</strong> Simplificar queries complejas, crear "tablas virtuales" reutilizables.
+                    </div>
+                    <pre><code class="sql">-- Crea una "tabla virtual" guardada
+-- La vista se actualiza automáticamente cuando cambian los datos
+-- Útil para simplificar queries complejas que usas repetidamente
+CREATE VIEW NombreVista AS
+SELECT Columna1, Columna2 FROM Tabla WHERE Condicion;</code></pre>
+                    <button class="copy-btn" onclick="copyCode(this)">📋 Copiar</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 8: FUNCIONES DE VENTANA (AVANZADO) -->
+        <section class="category-section" data-category="avanzado">
+            <h2>🔷 Funciones de Ventana (Avanzado)</h2>
+            <p class="category-description">Análisis avanzados: rankings, posiciones, comparaciones período anterior. Muy potente para BI.</p>
+
+            <!-- Query 48 -->
+            <div class="query-card" data-tags="rank ranking posición orden">
+                <div class="query-header">
+                    <span class="query-number">Query #48</span>
+                    <h3>Ranking de Productos por Precio</h3>
+                </div>
+                <div class="query-content">
+                    <div class="query-explanation">
+                        <strong>¿Para qué sirve?</strong> Asigna una posición/ranking a cada producto según precio.
+                        <br><strong>Uso en Power BI:</strong> Top N con ranking visible, clasificar productos/clientes por cualquier métrica.
+                    </div>
+                    <pre><code class="sql">-- Asigna un ranking (posición) según el criterio
+-- RANK() permite empates (dos productos en 1er lugar, siguiente es 3ro)
+-- Útil para Top N con ranking visible
+SELECT 
+    Nombre,
+    Precio,
+    RANK() OVER (ORDER BY Precio DESC) AS RankingPrecio
+FROM Productos;</code></pre>
+                    <button class="copy-btn" onclick="copyCode(this)">📋 Copiar</button>
+                </div>
+            </div>
+
+            <!-- Query 49 -->
+            <div class="query-card" data-tags="row_number número partición categoría">
+                <div class="query-header">
+                    <span class="query-number">Query #49</span>
+                    <h3>Número de Fila por Categoría</h3>
+                </div>
+                <div class="query-content">
+                    <div class="query-explanation">
+                        <strong>¿Para qué sirve?</strong> Enumera registros DENTRO de cada categoría/grupo.
+                        <br><strong>Uso en Power BI:</strong> Top 3 productos POR categoría, mejores 5 clientes POR región.
+                    </div>
+                    <pre><code class="sql">-- Numera filas DENTRO de cada grupo
+-- PARTITION BY reinicia el conteo en cada categoría
+-- Útil para Top N POR categoría
+SELECT 
+    Nombre,
+    Categoria,
+    ROW_NUMBER() OVER (PARTITION BY Categoria ORDER BY Precio DESC) AS Posicion
+FROM Productos;</code></pre>
+                    <button class="copy-btn" onclick="copyCode(this)">📋 Copiar</button>
+                </div>
+            </div>
+
+            <!-- Query 50 -->
+            <div class="query-card" data-tags="lag mes anterior comparar tendencia">
+                <div class="query-header">
+                    <span class="query-number">Query #50</span>
+                    <h3>Comparar con Período Anterior</h3>
+                </div>
+                <div class="query-content">
+                    <div class="query-explanation">
+                        <strong>¿Para qué sirve?</strong> Compara cada mes con el mes anterior en la misma fila.
+                        <br><strong>Uso en Power BI:</strong> Calcular crecimiento mes a mes, variación vs período anterior.
+                    </div>
+                    <pre><code class="sql">-- LAG trae el valor del mes anterior en la misma fila
+-- Útil para calcular crecimiento: (Actual - Anterior) / Anterior * 100
+-- Permite análisis de tendencia mes a mes
+SELECT 
+    YEAR(Fecha) AS Año,
+    MONTH(Fecha) AS Mes,
+    SUM(Total) AS VentasActual,
+    LAG(SUM(Total)) OVER (ORDER BY YEAR(Fecha), MONTH(Fecha)) AS VentasMesAnterior
+FROM Ventas
+GROUP BY YEAR(Fecha), MONTH(Fecha);</code></pre>
+                    <button class="copy-btn" onclick="copyCode(this)">📋 Copiar</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>💡 <strong>Tip:</strong> Cambia los nombres de tablas/columnas según tu base de datos. Todos los queries tienen comentarios explicativos.</p>
+            <p>📊 Creado para proyectos de Power BI y análisis de datos</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
